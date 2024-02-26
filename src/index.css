@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+dialog::backdrop{
+    background:rgb(223, 229, 231);
+    opacity: .7;
+}
+.checkbox {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    animation: drawCheckbox 1.5s forwards;
+    border: 2px solid #333;
+    box-sizing: border-box;
+}
+
+.checkbox:before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 25%;
+    width: 25px;
+    height: 5px;
+    background-color: #333;
+    transform-origin: left center;
+    transform: rotate(45deg) scaleX(0);
+}
+
+.checkbox:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    width: 45px;
+    height: 5px;
+    background-color: #333;
+    transform-origin: left center;
+    transform: scaleX(0);
+}
+
+@keyframes drawCheckbox {
+    0% {
+        width: 0;
+        height: 0;
+    }
+    50% {
+        width: 50px;
+        height: 50px;
+    }
+    100% {
+        width: 100px;
+        height: 100px;
+    }
+    50% {
+        height: 25px;
+    }
+    100% {
+        height: 50px;
+    }
+    50% {
+        transform: rotate(45deg) scaleX(0.5);
+    }
+    100% {
+        transform: rotate(45deg) scaleX(1);
+    }
+    100% {
+        transform: scaleX(1);
+    }
+}
