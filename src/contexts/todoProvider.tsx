@@ -29,12 +29,28 @@ const TodoProvider:React.FC<{children: React.ReactNode }> = ({ children }) => {
 
   const updateTodo = async (todo: ITodos) =>{
 
-      todo.status = !todo.status
+      // todo.status = !todo.status
 
 
     await axios.patch<ITodos[]>(`http://localhost:4000/todos/${todo.id}`, todo).catch((e: AxiosError) => { // really AxiosError?
     console.log(e.message);
     
+  })
+  fetchTodos()
+}
+
+  const deleteTodo = async (todo: ITodos) =>{
+    await axios.delete<ITodos[]>(`http://localhost:4000/todos/${todo.id}`).catch((e: AxiosError) => { // really AxiosError?
+    console.log(e.message);
+    function hideDiv(): void {
+      const myDiv: HTMLElement | null = document.getElementById("myDiv");
+    
+      if (myDiv) {
+        myDiv.classList.remove("disappear");
+        myDiv.classList.add("disappear-animation", "my-animation");
+      }
+    }
+    hideDiv();    
   })
   fetchTodos()
 }
@@ -47,7 +63,7 @@ const TodoProvider:React.FC<{children: React.ReactNode }> = ({ children }) => {
   }, [fetchTodos])
 
   return (
-    <TodoContext.Provider value={{ todos ,addTodo ,updateTodo}}>
+    <TodoContext.Provider value={{ todos ,addTodo ,updateTodo,deleteTodo}}>
       {children}
       </TodoContext.Provider>
   );
