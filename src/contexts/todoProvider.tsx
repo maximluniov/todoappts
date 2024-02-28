@@ -63,7 +63,9 @@ const TodoProvider:React.FC<{children: React.ReactNode }> = ({ children }) => {
 
   return (
     <TodoContext.Provider value={{ todos ,addTodo ,updateTodo,deleteTodo}}>
+
       {children}
+      
       </TodoContext.Provider>
   );
   };
