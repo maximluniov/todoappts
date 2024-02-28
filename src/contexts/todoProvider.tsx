@@ -8,7 +8,7 @@ export const TodoContext = createContext<TodoContextType | null>(null);
 const url = "https://databasefortodoapp.onrender.com/todos"
 
 
-const TodoProvider:React.FC<{children: React.ReactNode }> = ({ children }) => {
+const TodoProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   const [todos, setTodos] = useState<ITodos[]>([]);
 
@@ -20,39 +20,30 @@ const TodoProvider:React.FC<{children: React.ReactNode }> = ({ children }) => {
 
 
   const addTodo = async (todo: ITodos) => {
-      await axios.post<ITodos[]>(url, todo).catch((e: AxiosError) => { // really AxiosError?
+    await axios.post<ITodos[]>(url, todo).catch((e: AxiosError) => { // really AxiosError?
       console.log(e.message);
-  } )
-  fetchTodos()
+    })
+    fetchTodos()
   }
 
-  const updateTodo = async (todo: ITodos) =>{
+  const updateTodo = async (todo: ITodos) => {
 
-      // todo.status = !todo.status
+    // todo.status = !todo.status
 
 
     await axios.patch<ITodos[]>(`${url}/${todo.id}`, todo).catch((e: AxiosError) => { // really AxiosError?
-    console.log(e.message);
-    
-  })
-  fetchTodos()
-}
+      console.log(e.message);
 
-  const deleteTodo = async (todo: ITodos) =>{
+    })
+    fetchTodos()
+  }
+
+  const deleteTodo = async (todo: ITodos) => {
     await axios.delete<ITodos[]>(`https://databasefortodoapp.onrender.com/todos/${todo.id}`).catch((e: AxiosError) => { // really AxiosError?
-    console.log(e.message);
-    function hideDiv(): void {
-      const myDiv: HTMLElement | null = document.getElementById("myDiv");
-    
-      if (myDiv) {
-        myDiv.classList.remove("disappear");
-        myDiv.classList.add("disappear-animation", "my-animation");
-      }
-    }
-    hideDiv();    
-  })
-  fetchTodos()
-}
+      console.log(e.message);
+    })
+    fetchTodos()
+  }
 
 
 
@@ -62,12 +53,12 @@ const TodoProvider:React.FC<{children: React.ReactNode }> = ({ children }) => {
   }, [fetchTodos])
 
   return (
-    <TodoContext.Provider value={{ todos ,addTodo ,updateTodo,deleteTodo}}>
+    <TodoContext.Provider value={{ todos, addTodo, updateTodo, deleteTodo }}>
 
       {children}
-      
-      </TodoContext.Provider>
+
+    </TodoContext.Provider>
   );
-  };
+};
 
 export default TodoProvider;
