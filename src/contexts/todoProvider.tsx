@@ -1,12 +1,11 @@
 import React, { useState, useCallback, createContext, useEffect } from "react";
 import { ITodos, TodoContextType } from "../interfaces/types";
 import axios, { AxiosError } from 'axios'
-// import { error } from "console";
 
 
 export const TodoContext = createContext<TodoContextType | null>(null);
 
-
+const url = "https://databasefortodoapp.onrender.com/todos"
 
 
 const TodoProvider:React.FC<{children: React.ReactNode }> = ({ children }) => {
@@ -14,14 +13,14 @@ const TodoProvider:React.FC<{children: React.ReactNode }> = ({ children }) => {
   const [todos, setTodos] = useState<ITodos[]>([]);
 
   const fetchTodos = useCallback(async () => {
-    const res = await axios.get<ITodos[]>("http://localhost:4000/todos");
+    const res = await axios.get<ITodos[]>(url);
     // console.log(res.data);
     setTodos(res.data);
   }, []);
 
 
   const addTodo = async (todo: ITodos) => {
-      await axios.post<ITodos[]>("http://localhost:4000/todos", todo).catch((e: AxiosError) => { // really AxiosError?
+      await axios.post<ITodos[]>(url, todo).catch((e: AxiosError) => { // really AxiosError?
       console.log(e.message);
   } )
   fetchTodos()
@@ -32,7 +31,7 @@ const TodoProvider:React.FC<{children: React.ReactNode }> = ({ children }) => {
       // todo.status = !todo.status
 
 
-    await axios.patch<ITodos[]>(`http://localhost:4000/todos/${todo.id}`, todo).catch((e: AxiosError) => { // really AxiosError?
+    await axios.patch<ITodos[]>(`${url}/${todo.id}`, todo).catch((e: AxiosError) => { // really AxiosError?
     console.log(e.message);
     
   })
@@ -40,7 +39,7 @@ const TodoProvider:React.FC<{children: React.ReactNode }> = ({ children }) => {
 }
 
   const deleteTodo = async (todo: ITodos) =>{
-    await axios.delete<ITodos[]>(`http://localhost:4000/todos/${todo.id}`).catch((e: AxiosError) => { // really AxiosError?
+    await axios.delete<ITodos[]>(`https://databasefortodoapp.onrender.com/todos/${todo.id}`).catch((e: AxiosError) => { // really AxiosError?
     console.log(e.message);
     function hideDiv(): void {
       const myDiv: HTMLElement | null = document.getElementById("myDiv");

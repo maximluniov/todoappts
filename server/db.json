@@ -1,22 +1,3 @@
 {
-  "todos": [
-    {
-      "id": "f9d5869a-5246-4504-801a-397b68e151ec",
-      "title": "qqq",
-      "status": false,
-      "description": "qwe"
-    },
-    {
-      "id": "74f0a1f0-91e0-4997-988d-1761b1a4b99f",
-      "title": "qqqqwe123",
-      "status": false,
-      "description": "qwe"
-    },
-    {
-      "id": "35ff8cda-5961-4d79-8188-075f44d966a7",
-      "title": "qqqqwe123",
-      "status": true,
-      "description": "qwe"
-    }
-  ]
+  "todos": []
 }
