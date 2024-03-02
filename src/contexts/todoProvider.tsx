@@ -5,7 +5,8 @@ import axios, { AxiosError } from 'axios'
 
 export const TodoContext = createContext<TodoContextType | null>(null);
 
-const url = "https://databasefortodoapp.onrender.com/todos"
+const url = "https://databasefortodoapp.onrender.com/todos?_sort=date"
+const urlBase = "https://databasefortodoapp.onrender.com/todos"
 
 
 const TodoProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -14,35 +15,39 @@ const TodoProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 
   const fetchTodos = useCallback(async () => {
     const res = await axios.get<ITodos[]>(url);
-    // console.log(res.data);
     setTodos(res.data);
   }, []);
 
 
   const addTodo = async (todo: ITodos) => {
-    await axios.post<ITodos[]>(url, todo).catch((e: AxiosError) => { // really AxiosError?
+    setTodos(prev => [...prev, todo])
+    await axios.post<ITodos[]>(urlBase, todo).catch((e: AxiosError) => {
       console.log(e.message);
     })
-    fetchTodos()
   }
 
   const updateTodo = async (todo: ITodos) => {
+    todos.map((item) => {
+      if (item.id === todo.id) {
+        const updatedTodos = todos.filter((item) => !(item.id === todo.id))
+        setTodos([...updatedTodos, todo]);
+      } return true;
+    })
 
-    // todo.status = !todo.status
-
-
-    await axios.patch<ITodos[]>(`${url}/${todo.id}`, todo).catch((e: AxiosError) => { // really AxiosError?
+    await axios.patch<ITodos[]>(`${urlBase}/${todo.id}`, todo).catch((e: AxiosError) => {
       console.log(e.message);
 
     })
-    fetchTodos()
+
   }
 
   const deleteTodo = async (todo: ITodos) => {
-    await axios.delete<ITodos[]>(`https://databasefortodoapp.onrender.com/todos/${todo.id}`).catch((e: AxiosError) => { // really AxiosError?
+    setTodos(prev => prev.filter((item) => !(item.id === todo.id)))
+
+    await axios.delete<ITodos[]>(`${urlBase}/${todo.id}`).catch((e: AxiosError) => {
       console.log(e.message);
     })
-    fetchTodos()
+
   }
 
 

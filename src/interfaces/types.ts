@@ -3,6 +3,7 @@ export interface ITodos {
   title: string;
   description: string;
   status: boolean;
+  date: string;
 }
 
 export type TodoContextType = {
@@ -10,4 +11,13 @@ export type TodoContextType = {
     updateTodo: (todo: ITodos) => void;
     addTodo: (todo: ITodos) => void;
     deleteTodo: (todo: ITodos) => void;
+  };
+  
+export type ModalContextType = {
+  updateOpen:boolean,
+  addOpen:boolean,
+    handleAddOpen:()=>void;
+    handleUpdateClose:()=>void;
+    todo:ITodos;
+    handleUpdateModal:(todo:ITodos)=>void;
   };
