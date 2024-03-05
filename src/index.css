@@ -5,46 +5,60 @@
 
 
 dialog::backdrop {
-  background: rgb(223, 229, 231);
+  background: rgb(145, 146, 146);
   opacity: .7;
+  z-index: 10;
+}
+
+@media only screen and (min-width: 1024px) {
+  .animating-box-show {
+    animation: slideDown 1s ease forwards;
+    opacity: 0;
+  }
+  .animating-box-hide {
+    animation: slideUp 1s forwards;
+    opacity: 0;
+  }
 }
 
 
-
-
-.animating-box-show {
+/* .animating-box-show {
   animation: slideDown 1s ease forwards;
   opacity: 0;
-}
+} */
 
 @keyframes slideDown {
   0% {
-    /* transform: translateY(-100%); */
     margin-bottom: -100px;
     opacity: 0;
   }
-/* 
-  50%{
-    transform: translateY(-50%);
-    margin-bottom: 50px;
-    opacity: 0.5;
-  } */
-  75%{
-    opacity: 1;
-  }
 
   100% {
-    /* transform: translateY(0%); */
-    
     opacity: 1;
     margin-bottom: 0px;
   }
 }
 
-.animating-box-hide {
+
+
+.appearance {
+  animation: smoothShow 1s forwards;
+}
+
+@keyframes smoothShow {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* .animating-box-hide {
   animation: slideUp 1s forwards;
   opacity: 0;
-}
+} */
 
 @keyframes slideUp {
   0% {
@@ -53,45 +67,24 @@ dialog::backdrop {
   }
 
   100% {
-    margin-bottom: -64px;
+    margin-bottom: -80px;
     opacity: 0;
   }
 }
 
-/* .movedown {
-  animation: movedown 1s ease forwards;
-}
 
-@keyframes movedown {
-  0% {
-    margin-bottom: 0;
-  }
-  50%{
-    margin-bottom: 50px;
-  }
-
-  100% {
-    margin-bottom: 0px;
-  }
-}
-
-
-
-.moveup {
-  animation: moveup 1s ease forwards;
-}
-
-@keyframes moveup {
-  from {
-    margin-bottom: 0;
-  }
-  to {
-    margin-bottom: 100px;
-  }
-}
- */
-
-
- div,button,input,select{
+div,
+button,
+input,
+select,
+textarea{
   outline: none;
- }
+}
+
+.scaled {
+  transition: transform 0.3s ease;
+}
+
+.scaled:hover {
+  transform: scale(1.05);
+}

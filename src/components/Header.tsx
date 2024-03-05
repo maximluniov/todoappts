@@ -15,7 +15,7 @@ const Header = () => {
   
   
   return (
-    <div className='flex w-full bg-gray-200 p-8 justify-between'>
+    <div className='flex w-full items-center bg-gray-200 px-8 py-5 justify-between shadow-md max-[600px]:py-2 max-[600px]:px-4'>
         <h1 className='text-3xl font-bold '>TODO APP</h1>
         <div>{time}</div>
     </div>

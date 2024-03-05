@@ -22,7 +22,7 @@ const AddTodo = ({ onChange }: { onChange: (e: string) => void }) => {
 
     return (
         <>
-            <div className='flex w-2/4 px-10 py-10 justify-between items-center'>
+            <div className='flex w-2/4 px-10 py-10 justify-between items-center max-[1024px]:w-full max-[600px]:px-2'>
                 <div className='flex items-center cursor-pointer' onClick={()=>handleAddOpen()} >
                     <FaRegPlusSquare size={40} />
                     <h1>Add Task</h1>

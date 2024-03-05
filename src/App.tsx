@@ -4,6 +4,8 @@ import TodoProvider from './contexts/todoProvider';
 import Tasks from "./components/Tasks";
 import { useState } from "react";
 import ModalProvider from "./contexts/modalProvider";
+
+
 function App() {
 
   const [filtration, setFiltration] = useState<"all" | true | false>("all");
@@ -26,15 +28,15 @@ function App() {
 
   
   return (
-    <ModalProvider>
       <TodoProvider>
-        <div className="flex flex-col items-center">
+    <ModalProvider>
+        <div className="flex flex-col items-center max-[1024px]:text-lg">
           <Header />
           <AddTodos onChange={(e) => handleOnChange(e)} />
           <Tasks filtration={filtration} />
         </div>
-      </TodoProvider>
     </ModalProvider>
+      </TodoProvider>
 
   );
 }

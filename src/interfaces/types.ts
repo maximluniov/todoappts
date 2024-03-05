@@ -11,6 +11,7 @@ export type TodoContextType = {
     updateTodo: (todo: ITodos) => void;
     addTodo: (todo: ITodos) => void;
     deleteTodo: (todo: ITodos) => void;
+    loading:boolean;
   };
   
 export type ModalContextType = {
@@ -21,3 +22,5 @@ export type ModalContextType = {
     todo:ITodos;
     handleUpdateModal:(todo:ITodos)=>void;
   };
+
+
